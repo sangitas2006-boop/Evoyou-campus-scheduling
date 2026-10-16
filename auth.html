@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f2e8">
+  <meta name="description" content="Secure institutional access to the EVOYOU campus scheduling workspace.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <title>Secure access | EVOYOU Campus Scheduling</title>
+  <style>
+    :root{--paper:#efe8d8;--paper-light:#f7f2e8;--card:#fffcf6;--ink:#123533;--ink-deep:#0c2423;--copper:#a34e30;--copper-light:#a34e3017;--brass:#c69b4a;--olive:#5e7352;--seafoam:#a6c8ba;--line:#153b3a26;--line-soft:#153b3a14;--shadow:0 20px 48px #153b3a12}
+    *{box-sizing:border-box}html{min-height:100%;background:var(--paper-light)}body{min-height:100vh;margin:0;background:radial-gradient(1050px 520px at 88% -8%,#c69b4a1a,transparent 57%),radial-gradient(950px 520px at -8% 18%,#a6c8ba30,transparent 53%),var(--paper-light);color:var(--ink);font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input{font:inherit}.top-rule{height:4px;background:linear-gradient(90deg,var(--copper),var(--brass),var(--olive),#3e667a)}.skip{position:absolute;z-index:5;top:-60px;left:16px;padding:10px 14px;border-radius:8px;background:var(--ink);color:#fff}.skip:focus{top:12px}
+    .auth-page{position:relative;display:grid;min-height:calc(100vh - 4px);overflow:hidden}.atmosphere{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 77% 18%,#a6c8ba44,transparent 29%),radial-gradient(circle at 15% 86%,#c69b4a21,transparent 31%),linear-gradient(115deg,#153b3a0b,transparent 48%)}
+    .shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,460px);align-items:center;gap:clamp(40px,8vw,118px);width:min(1160px,calc(100% - 48px));margin:0 auto;padding:34px 0 30px}
+    .story{display:flex;min-height:640px;flex-direction:column;justify-content:space-between;padding:10px 0}.brand{display:inline-flex;align-items:center;gap:12px;width:fit-content}.brand-logo{display:block;flex:0 0 46px;width:46px;height:46px;padding:3px;border:1px solid #c69b4a82;border-radius:11px;background:#111722;box-shadow:0 4px 11px #153b3a24;object-fit:contain}.brand strong{display:block;color:var(--ink-deep);font-size:20px;letter-spacing:-.04em;line-height:1}.brand small{display:block;margin-top:5px;color:var(--olive);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .story-copy{max-width:650px;margin:auto 0;padding:72px 0 42px}.eyebrow,.card-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--copper);font-family:"DM Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}.eyebrow-dot{width:8px;height:8px;border-radius:50%;background:var(--olive);box-shadow:0 0 0 4px #5e735218}.story h1{max-width:620px;margin:20px 0 16px;color:var(--ink-deep);font-family:"Playfair Display",Georgia,serif;font-size:clamp(47px,6vw,78px);font-weight:600;letter-spacing:-.055em;line-height:.98}.story h1 em{color:var(--copper);font-weight:600}.story-copy-text{max-width:520px;margin:0;color:#526d68;font-size:16px;line-height:1.75}.proof-list{display:grid;gap:11px;color:#48625e;font-size:12px;font-weight:700}.proof-list span{display:flex;align-items:center;gap:10px}.check{display:grid;width:21px;height:21px;flex:0 0 21px;place-items:center;border:1px solid #c69b4a70;border-radius:50%;background:#c69b4a12;color:var(--copper);font-size:12px}
+    .card{padding:clamp(26px,3.5vw,40px);border:1px solid #153b3a24;border-radius:22px;background:#fffcf6e8;box-shadow:0 26px 70px #153b3a16;backdrop-filter:blur(12px)}.card-kicker{padding:6px 9px;border:1px solid var(--line-soft);border-radius:999px;background:#f7f2e8a8;color:#526c62;font-size:9px}.card-kicker-mark{color:var(--copper);font-size:13px}.card h2{margin:17px 0 7px;color:var(--ink-deep);font-family:"Playfair Display",Georgia,serif;font-size:clamp(29px,3vw,39px);font-weight:600;letter-spacing:-.045em;line-height:1.05}.card-intro{margin:0;color:#667b75;font-size:13px;line-height:1.65}
+    .mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:24px 0 21px;padding:4px;border-radius:10px;background:#153b3a0e}.mode-switch button{min-height:40px;padding:9px 8px;border:0;border-radius:7px;background:transparent;color:#667b75;cursor:pointer;font-size:12px;font-weight:800}.mode-switch button[aria-pressed="true"]{background:#fffdf8;color:var(--ink-deep);box-shadow:0 3px 9px #153b3a12}.mode-switch button:focus-visible,.button:focus-visible,.text-button:focus-visible,.password-toggle:focus-visible,a:focus-visible{outline:3px solid var(--brass);outline-offset:3px}
+    .form{display:grid;gap:14px}.field{display:grid;gap:6px;color:var(--ink-deep);font-size:12px;font-weight:800}.field input{width:100%;min-width:0;min-height:45px;padding:11px 12px;border:1px solid #153b3a2e;border-radius:9px;background:#ffffffb8;color:var(--ink-deep);font-size:14px;font-weight:500;outline:0}.field input::placeholder{color:#82918b;font-weight:400}.field input:focus{border-color:var(--copper);box-shadow:0 0 0 3px #a34e3017}.field-hint{margin-top:-1px;color:#798780;font-size:10px;font-weight:500;line-height:1.45}.password-field{position:relative;display:block}.password-field input{padding-right:48px}.password-toggle{position:absolute;top:50%;right:7px;display:grid;width:34px;height:34px;place-items:center;transform:translateY(-50%);border:0;border-radius:7px;background:transparent;color:#5e7352;cursor:pointer}.password-toggle svg{width:17px;height:17px}.field-row{display:flex;justify-content:flex-end;margin-top:-7px}.text-button{padding:2px 0;border:0;background:transparent;color:var(--copper);cursor:pointer;font-size:11px;font-weight:800;text-decoration:underline;text-underline-offset:3px}.form-message{padding:11px 12px;border:1px solid #c69b4a52;border-radius:9px;background:#c69b4a14;color:#695621;font-size:11px;line-height:1.5}.form-message[hidden],[hidden]{display:none!important}
+    .button{display:inline-flex;min-height:45px;align-items:center;justify-content:center;gap:10px;padding:11px 15px;border:1px solid transparent;border-radius:10px;font-size:12px;font-weight:800;line-height:1.2;transition:transform .15s,box-shadow .15s}.button:hover{transform:translateY(-1px)}.button.primary{color:#fffaf0;background:linear-gradient(180deg,#1b4c4a,var(--ink-deep));box-shadow:0 7px 16px #153b3a2b}.button.outline{border-color:var(--line);background:#ffffff72;color:var(--ink)}.submit{width:100%;margin-top:3px;cursor:pointer}.submit:disabled{cursor:wait;opacity:.72}.auth-foot{display:grid;gap:12px;margin-top:18px}.auth-note{margin:0;color:#71807a;font-size:10px;line-height:1.55;text-align:center}.auth-note strong{color:#52685e}.auth-divider{display:flex;align-items:center;gap:12px;color:#83918b;font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase}.auth-divider:before,.auth-divider:after{height:1px;flex:1;background:var(--line-soft);content:""}.demo-link{width:100%}.demo-label{margin:10px 0 0;color:#526c62;font-size:10px;line-height:1.5;text-align:center}.card-links{display:flex;justify-content:space-between;gap:12px;margin-top:22px;padding-top:15px;border-top:1px solid var(--line-soft);color:#637770;font-size:10px;font-weight:700}.card-links a:hover{color:var(--copper);text-decoration:underline;text-underline-offset:3px}.site-footer{position:absolute;right:0;bottom:12px;left:0;color:#71817a;font-size:9px;text-align:center}
+    @media(max-width:960px){.shell{grid-template-columns:minmax(0,1fr) minmax(340px,430px);gap:36px;width:min(920px,calc(100% - 40px))}.story{min-height:590px}.story h1{font-size:clamp(44px,5.4vw,62px)}}
+    @media(max-width:760px){.shell{grid-template-columns:minmax(0,1fr);gap:25px;width:min(580px,calc(100% - 32px));padding:22px 0 50px}.story{min-height:0;gap:20px;padding:2px 0}.story-copy{padding:18px 0 0}.story h1{max-width:540px;margin:13px 0 10px;font-size:clamp(38px,9vw,54px)}.story-copy-text{font-size:14px;line-height:1.65}.proof-list{grid-template-columns:1fr 1fr;gap:9px;font-size:10px}.proof-list span{align-items:flex-start}.check{width:18px;height:18px;flex-basis:18px}.card{padding:24px 20px;border-radius:18px}.card h2{font-size:32px}.mode-switch{margin:20px 0 18px}.site-footer{position:relative;bottom:auto;padding:0 16px 18px}}
+    @media(max-width:380px){.shell{width:calc(100% - 24px)}.brand{gap:9px}.brand-logo{flex-basis:42px;width:42px;height:42px}.brand strong{font-size:18px}.story h1{font-size:38px}.proof-list{grid-template-columns:1fr}.card{padding:21px 16px}.card h2{font-size:29px}.card-links{font-size:9px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
+    /* Invitation adds form fields; pin only the left story to the same vertical position as sign-in. */
+    @media(min-width:761px){.auth-page[data-mode="invite"] .story{align-self:start;margin-top:70px}}
+    @media(min-width:761px) and (max-width:960px){.auth-page[data-mode="invite"] .story{margin-top:95px}}
+  </style>
+</head>
+<body>
+  <div class="top-rule" aria-hidden="true"></div>
+  <a class="skip" href="#access-card">Skip to sign-in form</a>
+  <main class="auth-page" data-mode="sign-in">
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="shell">
+      <section class="story" aria-labelledby="story-title">
+        <a class="brand" href="home.html" aria-label="EVOYOU campus scheduling home">
+          <img class="brand-logo" src="logo.png" alt="">
+          <span><strong>EVOYOU</strong><small>Campus Scheduling</small></span>
+        </a>
+        <div class="story-copy">
+          <span class="eyebrow"><i class="eyebrow-dot" aria-hidden="true"></i> Institutional workspace</span>
+          <h1 id="story-title">The right people.<br><em>The right schedule.</em></h1>
+          <p class="story-copy-text">Secure access for campus scheduling teams. Sign in to your institution’s workspace, or accept an invitation from your campus administrator.</p>
+        </div>
+        <div class="proof-list" aria-label="EVOYOU access principles">
+          <span><i class="check" aria-hidden="true">✓</i> Campus-scoped access</span>
+          <span><i class="check" aria-hidden="true">✓</i> Coordinator-reviewed changes</span>
+          <span><i class="check" aria-hidden="true">✓</i> Sample demo stays open</span>
+        </div>
+      </section>
+
+      <section class="card" id="access-card" aria-labelledby="card-title">
+        <span class="card-kicker"><span class="card-kicker-mark" aria-hidden="true">◈</span> Secure workspace access</span>
+        <h2 id="card-title">Welcome back.</h2>
+        <p class="card-intro" id="card-intro">Sign in with your campus account to continue to EVOYOU.</p>
+        <div class="mode-switch" role="group" aria-label="Choose sign-in or invitation mode">
+          <button type="button" id="mode-signin" aria-pressed="true">Sign in</button>
+          <button type="button" id="mode-invite" aria-pressed="false">Accept invitation</button>
+        </div>
+        <form class="form" id="auth-form" novalidate>
+          <label class="field" id="name-field" hidden>
+            <span>Full name</span>
+            <input id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Your name" disabled>
+          </label>
+          <label class="field">
+            <span>Institutional email</span>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="username" placeholder="you@college.edu" required>
+            <span class="field-hint">Use the address connected to your campus invitation.</span>
+          </label>
+          <label class="field" id="invite-field" hidden>
+            <span>Invitation code</span>
+            <input id="invite-code" name="invite-code" type="text" autocomplete="off" placeholder="Enter the code from your invitation" disabled>
+            <span class="field-hint">Campus administrators issue and approve workspace access.</span>
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <span class="password-field">
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+              <button class="password-toggle" type="button" data-toggle-password="password" aria-label="Show password" title="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </span>
+          </label>
+          <label class="field" id="confirm-field" hidden>
+            <span>Confirm password</span>
+            <span class="password-field">
+              <input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" placeholder="Re-enter your password" disabled>
+              <button class="password-toggle" type="button" data-toggle-password="confirm-password" aria-label="Show confirmation password" title="Show confirmation password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </span>
+          </label>
+          <div class="field-row" id="forgot-row"><button class="text-button" type="button" id="forgot-button">Forgot password?</button></div>
+          <div class="form-message" id="form-message" role="status" aria-live="polite" hidden></div>
+          <button class="button primary submit" id="submit-button" type="submit">Sign in <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="auth-foot">
+          <p class="auth-note"><strong>Invitation-only account creation.</strong> Campus administrators provision institutions and invite scheduling staff.</p>
+          <div class="auth-divider"><span>or</span></div>
+          <a class="button outline demo-link" href="campus-timetable.html">Explore the sample workspace <span aria-hidden="true">→</span></a>
+          <p class="demo-label">Fictional sample schedule · no sign-in required · saved only in this browser</p>
+        </div>
+        <div class="card-links"><a href="home.html">← Back to EVOYOU</a><a href="campus-timetable.html">Open demo workspace</a></div>
+      </section>
+    </div>
+    <footer class="site-footer">Preview build · Supabase is not connected · Form values are not sent or stored.</footer>
+  </main>
+  <script>
+    (()=>{
+      const form=document.getElementById('auth-form');
+      const modeButtons=[document.getElementById('mode-signin'),document.getElementById('mode-invite')];
+      const nameField=document.getElementById('name-field');
+      const inviteField=document.getElementById('invite-field');
+      const confirmField=document.getElementById('confirm-field');
+      const password=document.getElementById('password');
+      const confirmPassword=document.getElementById('confirm-password');
+      const forgotRow=document.getElementById('forgot-row');
+      const submit=document.getElementById('submit-button');
+      const title=document.getElementById('card-title');
+      const intro=document.getElementById('card-intro');
+      const message=document.getElementById('form-message');
+      const page=document.querySelector('.auth-page');
+      let mode='sign-in';
+      const showMessage=text=>{message.textContent=text;message.hidden=false};
+      const setMode=next=>{
+        mode=next;
+        const inviting=mode==='invite';
+        page.dataset.mode=inviting?'invite':'sign-in';
+        modeButtons[0].setAttribute('aria-pressed',String(!inviting));
+        modeButtons[1].setAttribute('aria-pressed',String(inviting));
+        nameField.hidden=!inviting;nameField.querySelector('input').disabled=!inviting;nameField.querySelector('input').required=inviting;
+        inviteField.hidden=!inviting;inviteField.querySelector('input').disabled=!inviting;inviteField.querySelector('input').required=inviting;
+        confirmField.hidden=!inviting;confirmPassword.disabled=!inviting;confirmPassword.required=inviting;
+        password.autocomplete=inviting?'new-password':'current-password';
+        password.value='';confirmPassword.value='';confirmPassword.setCustomValidity('');
+        forgotRow.hidden=inviting;
+        title.textContent=inviting?'Accept your campus invitation.':'Welcome back.';
+        intro.textContent=inviting?'Create your account with an invitation issued by your campus administrator.':'Sign in with your campus account to continue to EVOYOU.';
+        submit.innerHTML=inviting?'Create invited account <span aria-hidden="true">→</span>':'Sign in <span aria-hidden="true">→</span>';
+        message.hidden=true;
+      };
+      modeButtons[0].addEventListener('click',()=>setMode('sign-in'));
+      modeButtons[1].addEventListener('click',()=>setMode('invite'));
+      document.querySelectorAll('[data-toggle-password]').forEach(button=>button.addEventListener('click',()=>{
+        const input=document.getElementById(button.dataset.togglePassword);
+        const showing=input.type==='password';input.type=showing?'text':'password';
+        button.setAttribute('aria-label',showing?'Hide password':'Show password');button.title=showing?'Hide password':'Show password';
+      }));
+      document.getElementById('forgot-button').addEventListener('click',()=>showMessage('Password recovery will be enabled when Supabase is connected. This preview does not send a recovery email.'));
+      form.addEventListener('submit',event=>{
+        event.preventDefault();
+        if(!form.reportValidity())return;
+        if(mode==='invite'&&password.value!==confirmPassword.value){confirmPassword.setCustomValidity('Passwords do not match.');confirmPassword.reportValidity();confirmPassword.addEventListener('input',()=>confirmPassword.setCustomValidity(''),{once:true});return;}
+        showMessage('Preview only: Supabase is not connected. No account was created, and the form values were not sent or stored.');
+      });
+    })();
+  </script>
+</body>
+</html>
