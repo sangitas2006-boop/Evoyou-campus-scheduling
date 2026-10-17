@@ -1,0 +1,4 @@
+[functions.evoyou-assistant]
+# The chat endpoint is called by the public static website using its publishable key.
+# Keep all model-provider credentials in Supabase Function Secrets, never in the website.
+verify_jwt = false
