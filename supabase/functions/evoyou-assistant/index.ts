@@ -6,7 +6,7 @@ async function hashClientIdentifier(value: string, pepper: string) {
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
-const allowedOrigins = (Deno.env.get("CHAT_ALLOWED_ORIGINS") ?? "https://sangitas2006-boop.github.io,http://localhost:4173,http://127.0.0.1:4173")
+const allowedOrigins = (Deno.env.get("CHAT_ALLOWED_ORIGINS") ?? "https://sangitas2006-boop.github.io,http://localhost:4173,http://127.0.0.1:4173,http://localhost:8765,http://127.0.0.1:8765")
   .split(",").map((origin) => origin.trim()).filter(Boolean);
 const corsHeaders = (origin: string | null) => ({
   "Access-Control-Allow-Origin": origin && allowedOrigins.includes(origin) ? origin : allowedOrigins[0],

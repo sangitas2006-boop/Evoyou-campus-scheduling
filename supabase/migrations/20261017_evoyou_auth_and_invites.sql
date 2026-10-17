@@ -143,9 +143,13 @@ $$;
 revoke all on function public.bootstrap_first_admin(text) from public, anon;
 grant execute on function public.bootstrap_first_admin(text) to authenticated;
 
+-- Remove the initial draft signature if this migration is rerun after review.
+drop function if exists public.issue_student_invitation(text,text,timestamptz);
+
 -- Create a high-entropy, one-time invite hash for an administrator's institution.
 -- The client generates the raw code; only its SHA-256 hash is stored.
 create or replace function public.issue_student_invitation(
+  p_institution_id uuid,
   p_email text,
   p_code_hash text,
   p_expires_at timestamptz
@@ -155,15 +159,14 @@ language plpgsql security definer
 set search_path = ''
 as $$
 declare
-  admin_institution uuid;
   new_id uuid;
   normalized_email text := lower(trim(p_email));
 begin
-  select m.institution_id into admin_institution
-  from public.memberships m
-  where m.user_id = (select auth.uid()) and m.role = 'admin'
-  order by m.created_at limit 1;
-  if admin_institution is null then raise exception 'Administrator access required'; end if;
+  if not exists (
+    select 1 from public.memberships m
+    where m.user_id = (select auth.uid())
+      and m.institution_id = p_institution_id and m.role = 'admin'
+  ) then raise exception 'Administrator access required'; end if;
   if normalized_email = '' or length(p_code_hash) <> 64
      or p_expires_at <= now() or p_expires_at > now() + interval '7 days' then
     raise exception 'Invalid invitation details';
@@ -171,23 +174,23 @@ begin
   if exists (
     select 1 from auth.users u
     join public.memberships m on m.user_id = u.id
-    where m.institution_id = admin_institution and lower(u.email) = normalized_email
+    where m.institution_id = p_institution_id and lower(u.email) = normalized_email
   ) then raise exception 'This email already has campus access'; end if;
   if exists (
     select 1 from public.student_invitations i
-    where i.institution_id = admin_institution and i.email = normalized_email
+    where i.institution_id = p_institution_id and i.email = normalized_email
       and i.accepted_at is null and i.revoked_at is null and i.expires_at > now()
   ) then raise exception 'An active invitation already exists for this email'; end if;
   insert into public.student_invitations
     (institution_id,email,code_hash,expires_at,created_by)
   values
-    (admin_institution,normalized_email,lower(p_code_hash),p_expires_at,(select auth.uid()))
+    (p_institution_id,normalized_email,lower(p_code_hash),p_expires_at,(select auth.uid()))
   returning id into new_id;
   return new_id;
 end;
 $$;
-revoke all on function public.issue_student_invitation(text,text,timestamptz) from public, anon;
-grant execute on function public.issue_student_invitation(text,text,timestamptz) to authenticated;
+revoke all on function public.issue_student_invitation(uuid,text,text,timestamptz) from public, anon;
+grant execute on function public.issue_student_invitation(uuid,text,text,timestamptz) to authenticated;
 
 -- The public invitation form receives only a true/false result; it cannot read
 -- invitation rows, tenant IDs, inviter identities or other student invitations.
@@ -215,7 +218,7 @@ as $$
   update public.student_invitations i
   set claimed_at = now()
   where i.email = lower(trim(p_email)) and i.code_hash = lower(p_code_hash)
-    and i.expires_at > now() and i.claimed_at is null
+    and i.expires_at > now() and (i.claimed_at is null or i.claimed_at < now() - interval '10 minutes')
     and i.accepted_at is null and i.revoked_at is null
   returning i.id;
 $$;

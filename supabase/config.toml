@@ -2,3 +2,7 @@
 # The chat endpoint is called by the public static website using its publishable key.
 # Keep all model-provider credentials in Supabase Function Secrets, never in the website.
 verify_jwt = false
+
+[functions.evoyou-create-student]
+# Public registration is restricted by one-time email-bound invitation validation in the function.
+verify_jwt = false

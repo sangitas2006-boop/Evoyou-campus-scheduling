@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f7f1">
+  <title>Campus workspace | EVOYOU</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f5f7f1;--paper:#fbfcf8;--ink:#172d1e;--green:#1b4c4a;--leaf:#467348;--muted:#4b6955;--line:#d7e0d2;--copper:#a34e30}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.top{border-top:4px solid var(--leaf);border-bottom:1px solid var(--line);background:#fbfcf8e8}.top-inner{width:min(1240px,100%);min-height:76px;margin:auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:800;font-size:19px;letter-spacing:-.04em}.brand small{display:block;color:var(--leaf);font-size:10px;letter-spacing:.1em;text-transform:uppercase}.user-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}.user-tools label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;font-weight:700}.user-tools select{max-width:240px}.layout{width:min(1240px,100%);margin:auto;padding:34px 22px 60px}.headline{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:24px}.headline h1{margin:0;font:600 clamp(32px,5vw,46px)/1.05 "Playfair Display",Georgia,serif;letter-spacing:-.04em}.headline p{margin:8px 0 0;color:var(--muted)}.panel{margin:18px 0;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--paper);box-shadow:0 8px 24px #294b3408}.panel h2{margin:0 0 6px;font-size:19px}.sub{margin:0 0 17px;color:var(--muted);font-size:13px}.role{display:inline-block;margin-top:10px;padding:5px 9px;border:1px solid #8eaf8a;border-radius:5px;background:#eef4ea;color:#326342;font:700 11px/1.2 "DM Mono",monospace;text-transform:uppercase}.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.field{display:grid;gap:5px;color:var(--ink);font-size:12px;font-weight:800}.field input,.field select{width:100%;min-width:0;min-height:42px;padding:9px 10px;border:1px solid #bdcbb7;border-radius:8px;background:white;color:var(--ink);font:500 14px Manrope,sans-serif}.actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:14px}.btn{min-height:40px;padding:9px 13px;border:1px solid transparent;border-radius:8px;background:var(--green);color:#fff;font:800 12px Manrope,sans-serif;cursor:pointer}.btn.secondary{border-color:var(--line);background:#fff;color:var(--green)}.btn.danger{border-color:#e4cabc;background:#fff8f3;color:#87442d}.btn:disabled{opacity:.55;cursor:wait}.status{margin:12px 0 0;padding:11px 13px;border:1px solid var(--line);border-radius:8px;background:#eff4ea;color:#315d38;font-size:13px}.status.error{border-color:#e4cabc;background:#fff8f3;color:#87442d}.status[hidden]{display:none}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px 8px;border-bottom:1px solid #e4eae0;text-align:left;vertical-align:top}th{color:var(--muted);font:700 11px "DM Mono",monospace;text-transform:uppercase}.table-wrap{overflow:auto}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.hidden{display:none!important}.foot{margin-top:28px;color:#6b7b70;font-size:12px}.busy{opacity:.7;pointer-events:none}@media(max-width:760px){.layout{padding:24px 15px 40px}.top-inner{padding:11px 15px}.form-grid{grid-template-columns:1fr 1fr}.panel{padding:17px}.user-tools{gap:7px}}@media(max-width:430px){.form-grid{grid-template-columns:1fr}.user-tools label{width:100%;justify-content:space-between}.user-tools select{max-width:64%}.headline h1{font-size:32px}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top-inner"><a class="brand" href="home.html" style="text-decoration:none;color:inherit">EVOYOU<small>Campus scheduling</small></a><div class="user-tools"><span id="user-email" aria-live="polite"></span><label id="institution-wrap" hidden>Campus <select id="institution-select" aria-label="Select campus"></select></label><button class="btn secondary" id="signout" type="button">Sign out</button></div></div></header>
+  <main class="layout">
+    <div class="headline"><div><h1>Campus workspace</h1><p id="welcome">Loading your campus timetable…</p><span id="role-badge" class="role" hidden></span></div><a class="btn secondary" href="campus-timetable.html">Open sample demo</a></div>
+    <div id="page-status" class="status" role="status" aria-live="polite" hidden></div>
+    <section class="panel" id="add-panel" hidden>
+      <h2>Add a shared class session</h2><p class="sub">Only a campus coordinator can create shared schedule entries. The database also rejects configured overlaps.</p>
+      <form id="session-form">
+        <div class="form-grid">
+          <label class="field">Course<input name="course" maxlength="120" placeholder="e.g., Data Structures" required></label>
+          <label class="field">Instructor<input name="teacher" maxlength="120" placeholder="e.g., Prof. Shah" required></label>
+          <label class="field">Room<input name="room" maxlength="80" placeholder="e.g., R101" required></label>
+          <label class="field">Cohort<input name="cohort" maxlength="80" placeholder="e.g., IT-A" required></label>
+          <label class="field">Students<input name="student_count" type="number" min="0" max="10000" value="40" required></label>
+          <label class="field">Room capacity<input name="room_capacity" type="number" min="1" max="10000" value="60" required></label>
+          <label class="field">Day<select name="day" required><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></label>
+          <label class="field">Start<input name="start_time" type="time" value="09:00" required></label>
+          <label class="field">End<input name="end_time" type="time" value="10:00" required></label>
+        </div>
+        <div class="actions"><button class="btn" type="submit">Save shared session</button></div>
+      </form>
+    </section>
+    <section class="panel">
+      <h2>Shared timetable</h2><p class="sub">Sessions shown are stored for the selected campus and loaded under your campus membership.</p>
+      <div class="table-wrap"><table><thead><tr><th>Day / time</th><th>Course</th><th>Instructor</th><th>Room</th><th>Cohort</th><th>Students</th><th id="actions-head" hidden>Admin actions</th></tr></thead><tbody id="session-rows"></tbody></table></div>
+      <div id="session-empty" class="empty" hidden>No shared sessions have been added for this campus yet.</div>
+      <div class="actions"><button id="export-csv" class="btn secondary" type="button">Export CSV</button><button id="refresh" class="btn secondary" type="button">Refresh timetable</button></div>
+    </section>
+    <section class="panel" id="invite-panel" hidden>
+      <h2>Invite a student</h2><p class="sub">Create a one-time code for a specific campus email. Copy and send it to the student; the raw code is shown only once.</p>
+      <form id="invite-form"><div class="form-grid"><label class="field">Student campus email<input type="email" name="email" autocomplete="off" placeholder="student@college.edu" required></label><label class="field">Code expires in days<select name="days"><option value="1">1 day</option><option value="3">3 days</option><option value="7" selected>7 days</option></select></label></div><div class="actions"><button class="btn" type="submit">Create one-time invitation</button></div></form>
+      <div id="invite-result" class="status" role="status" aria-live="polite" hidden></div>
+      <h3 style="margin-top:22px">Invitations</h3><div class="table-wrap"><table><thead><tr><th>Email</th><th>Expires</th><th>Status</th><th>Action</th></tr></thead><tbody id="invite-rows"></tbody></table></div>
+    </section>
+    <p class="foot">Campus data is protected by Supabase membership policies. The public timetable demo remains separate.</p>
+  </main>
+  <script src="supabase-config.js"></script><script src="assets/supabase-client.js"></script><script src="assets/campus-workspace.js"></script>
+</body>
+</html>
